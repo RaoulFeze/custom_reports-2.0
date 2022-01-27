@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<odoo>
+    <record id="action_so_report_ext" model="ir.actions.report">
+        <field name="name">Custom Report (S/O)</field>
+        <field name="model">sale.order</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">custom_reports.so_report_ext</field>
+        <field name="report_file">custom_reports.so_report_ext</field>
+        <field name="binding_model_id" ref="model_sale_order"/>
+        <field name="binding_type">report</field>
+    </record>
+</odoo>
