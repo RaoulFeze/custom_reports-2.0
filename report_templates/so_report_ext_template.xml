@@ -51,7 +51,7 @@
                         <div class="oe_structure"/>
                         <h2 class="mt16">
                             <t t-if="not (env.context.get('proforma', False) or is_pro_forma)">
-                                <span t-if="doc.state not in ['draft','sent']" class="check">Order #</span>
+                                <span t-if="doc.state not in ['draft','sent']" >Order #</span>
                                 <span t-if="doc.state in ['draft','sent']">Quotation #</span>
                             </t>
                             <t t-if="env.context.get('proforma', False) or is_pro_forma">
@@ -60,6 +60,8 @@
                             <span t-field="doc.name"/>
                         </h2>
 
+
+                        <!---->
                         <div class="row mt32 mb32" id="informations">
                             <div t-if="doc.client_order_ref" class="col-auto col-3 mw-100 mb-2">
                                 <strong>Your Reference:</strong>
@@ -72,7 +74,7 @@
                             </div>
                             <div t-if="doc.date_order and doc.state in ['draft','sent']"
                                  class="col-auto col-3 mw-100 mb-2">
-                                <strong>Quotation Date:</strong>
+                                <strong class="quotation">Quotation Date:</strong>
                                 <p class="m-0" t-field="doc.date_order" t-options='{"widget": "date"}'/>
                             </div>
                             <div t-if="doc.validity_date and doc.state in ['draft', 'sent']"

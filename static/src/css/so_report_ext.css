@@ -16,6 +16,12 @@ div.address{
     color: red;
 }
 
-.page h2 span.check{
+/* Order /Quotation sections*/
+.page h2.mt16{
     color:yellow;
+}
+
+/* Order/Quotation dates & sales person values*/
+.page div.row{
+    color:purple;
 }
