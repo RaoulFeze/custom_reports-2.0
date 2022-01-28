@@ -1,0 +1,21 @@
+:root{
+    --primary-color:#880808;
+    --secondary-color:#dc0b00;
+    --table-primary-color:#d40a00;
+    --table-secondary-color:#ffebea;
+}
+
+/*Both billing and shipping Addresses sections*/
+div.address{
+    color: #880808;
+    background-color: var(--secondary-color);
+    margin-bottom:30px;
+}
+/* Shipping Address section*/
+.shipping-address{
+    color: red;
+}
+
+.page h2 span.check{
+    color:yellow;
+}
