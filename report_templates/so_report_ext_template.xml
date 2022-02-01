@@ -1,40 +1,39 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!--<?xml-stylesheet href="custom_reports/static/src/css/so_report_ext.css"?>-->
+<?xml version="1.0" encoding="Big5" ?>
 <odoo>
-    <?xml-stylesheet type="text/css" href="custom_reports/static/src/css/so_report_ext.css"?>
     <template id="so_report_ext">
         <t t-call="web.html_container">
             <t t-foreach="docs" t-as="doc">
                 <t t-call="web.external_layout">
                     <link rel="stylesheet" href="custom_reports/static/src/css/so_report_ext.css"/>
+                    <!-- -->
                     <t t-set="doc" t-value="doc.with_context(lang=doc.partner_id.lang)"/>
                     <t t-set="forced_vat"
                        t-value="doc.fiscal_position_id.foreign_vat"/> <!-- So that it appears in the footer of the report instead of the company VAT if it's set -->
 
-                    <!--ADDRESSES-->
-                    <!-- BILLING ADDRESS -->
                     <t t-set="address">
                         <div t-field="doc.partner_id"
                              t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}'
-                             class="address"/>
+                             class="billing-address"/>
+
+                        <!-- BILLING ADDRESS-->
                         <p t-if="doc.partner_id.vat">
                             <t t-esc="doc.company_id.account_fiscal_country_id.vat_label or 'Tax ID'"/>:
                             <span t-field="doc.partner_id.vat"/>
                         </p>
                     </t>
 
-
-                    <!-- SHIPPING ADDRESS-->
+                    <!--SHIPPING ADDRESS-->
                     <t t-if="doc.partner_shipping_id == doc.partner_invoice_id
                              and doc.partner_invoice_id != doc.partner_id
                              or doc.partner_shipping_id != doc.partner_invoice_id">
                         <t t-set="information_block">
+
                             <div class="shipping-address">
-                                <strong t-if="doc.partner_shipping_id == doc.partner_invoice_id"
-                                        class="shipping-address">Invoicing and Shipping
-                                    Address:
+                                <strong t-if="doc.partner_shipping_id == doc.partner_invoice_id">Invoicing and
+                                    Shipping Address:
                                 </strong>
-                                <strong t-if="doc.partner_shipping_id != doc.partner_invoice_id">Invoicing Address:
+                                <strong t-if="doc.partner_shipping_id != doc.partner_invoice_id">Invoicing
+                                    Address:
                                 </strong>
                                 <div t-field="doc.partner_invoice_id"
                                      t-options='{"widget": "contact", "fields": ["address", "name", "phone"], "no_marker": True, "phone_icons": True}'/>
@@ -46,12 +45,13 @@
                             </div>
                         </t>
                     </t>
-
                     <div class="page">
                         <div class="oe_structure"/>
-                        <h2 class="mt16">
+
+                        <!--ORDER / QUOTATION-->
+                        <h2 class="mt16 order-quotation">
                             <t t-if="not (env.context.get('proforma', False) or is_pro_forma)">
-                                <span t-if="doc.state not in ['draft','sent']" >Order #</span>
+                                <span t-if="doc.state not in ['draft','sent']">Order #</span>
                                 <span t-if="doc.state in ['draft','sent']">Quotation #</span>
                             </t>
                             <t t-if="env.context.get('proforma', False) or is_pro_forma">
@@ -61,14 +61,14 @@
                         </h2>
 
 
-                        <!---->
-                        <div class="row mt32 mb32" id="informations">
+                        <!--ORDER DATE / SALES PERSON-->
+                        <div class="row mt32 mb32 test" id="informations">
                             <div t-if="doc.client_order_ref" class="col-auto col-3 mw-100 mb-2">
                                 <strong>Your Reference:</strong>
                                 <p class="m-0" t-field="doc.client_order_ref"/>
                             </div>
                             <div t-if="doc.date_order and doc.state not in ['draft','sent']"
-                                 class="col-auto col-3 mw-100 mb-2">
+                                 class="col-auto col-3 mw-100 mb-2 order-date">
                                 <strong>Order Date:</strong>
                                 <p class="m-0" t-field="doc.date_order"/>
                             </div>
@@ -82,7 +82,7 @@
                                 <strong>Expiration:</strong>
                                 <p class="m-0" t-field="doc.validity_date"/>
                             </div>
-                            <div t-if="doc.user_id.name" class="col-auto col-3 mw-100 mb-2">
+                            <div t-if="doc.user_id.name" class="col-auto col-3 mw-100 mb-2 sales-person">
                                 <strong>Salesperson:</strong>
                                 <p class="m-0" t-field="doc.user_id"/>
                             </div>
@@ -93,7 +93,7 @@
 
                         <table class="table table-sm o_main_table">
                             <!-- In case we want to repeat the header, remove "display: table-row-group" -->
-                            <thead style="display: table-row-group">
+                            <thead style="display: table-row-group" class="table-head">
                                 <tr>
                                     <th name="th_description" class="text-left">Description</th>
                                     <th name="th_quantity" class="text-right">Quantity</th>
@@ -180,6 +180,7 @@
                             </tbody>
                         </table>
 
+                        <!--TOTAL Can't get hold of this section with CSS selectors.-->
                         <div class="clearfix" name="so_total_summary">
                             <div id="total" class="row" name="total">
                                 <div t-attf-class="#{'col-4' if report_type != 'html' else 'col-sm-7 col-md-5'} ml-auto">
@@ -191,6 +192,8 @@
                                 </div>
                             </div>
                         </div>
+
+                        <!--  THIS SECTION DOES NOT APPEAR ON THE REPORT-->
 
                         <div t-if="doc.signature" class="mt32 ml64 mr4" name="signature">
                             <div class="offset-8">
@@ -205,6 +208,7 @@
                             </div>
                         </div>
 
+                        <!--  THIS SECTION DOES NOT APPEAR ON THE REPORT-->
                         <div class="oe_structure"/>
 
                         <p t-field="doc.note"/>
@@ -216,14 +220,13 @@
                             <strong>Fiscal Position Remark:</strong>
                             <span t-field="doc.fiscal_position_id.sudo().note"/>
                         </p>
-
                     </div>
                 </t>
             </t>
         </t>
     </template>
 
-
+    <!--  THIS SECTION DOES NOT APPEAR ON THE REPORT-->
     <template id="report_saleorder">
         <t t-call="web.html_container">
             <t t-foreach="docs" t-as="doc">
@@ -231,7 +234,8 @@
             </t>
         </t>
     </template>
-
+    
+    <!--  THIS SECTION DOES NOT APPEAR ON THE REPORT-->
     <template id="report_saleorder_pro_forma">
         <t t-call="web.html_container">
             <t t-set="is_pro_forma" t-value="True"/>

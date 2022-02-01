@@ -1,27 +1,66 @@
-:root{
+/*:root{
     --primary-color:#880808;
     --secondary-color:#dc0b00;
     --table-primary-color:#d40a00;
     --table-secondary-color:#ffebea;
 }
-
-/*Both billing and shipping Addresses sections*/
+*/
+/*Both billing and shipping Addresses sections*//*
 div.address{
     color: #880808;
     background-color: var(--secondary-color);
     margin-bottom:30px;
 }
 /* Shipping Address section*/
-.shipping-address{
+/*.shipping-address{
     color: red;
 }
 
 /* Order /Quotation sections*/
-.page h2.mt16{
+/*.page h2.mt16{
     color:yellow;
 }
 
 /* Order/Quotation dates & sales person values*/
-.page div.row{
+/*.page div.row{
     color:purple;
+}
+/* --------------------------------*/
+div.address
+ {
+    background-color:blue;
+ }
+div.billing-address{
+    background-color:orange;
+}
+.shipping-address{
+    background-color:red;
+}
+
+h2.order-quotation{
+    background-color:yellow;
+}
+
+div.test {
+background-color:teal;}
+
+div.order-date{
+background-color:aqua;
+}
+
+div.sales-person{
+    background-color:indigo;
+   }
+.table-head{
+    background-color:forestgreen;
+    }
+tbody tr:nth-child(odd){
+    background-color:grey;
+}
+tbody tr:nth-child(even){
+    background-color:skyblue;
+}
+
+.total-bill{
+    background-color:green !important;
 }
