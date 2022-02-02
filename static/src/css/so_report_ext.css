@@ -5,27 +5,7 @@
     --table-secondary-color:#ffebea;
 }
 */
-/*Both billing and shipping Addresses sections*//*
-div.address{
-    color: #880808;
-    background-color: var(--secondary-color);
-    margin-bottom:30px;
-}
-/* Shipping Address section*/
-/*.shipping-address{
-    color: red;
-}
 
-/* Order /Quotation sections*/
-/*.page h2.mt16{
-    color:yellow;
-}
-
-/* Order/Quotation dates & sales person values*/
-/*.page div.row{
-    color:purple;
-}
-/* --------------------------------*/
 div.address
  {
     background-color:blue;
@@ -54,13 +34,13 @@ div.sales-person{
 .table-head{
     background-color:forestgreen;
     }
-tbody tr:nth-child(odd){
+tbody.main-body tr:nth-child(odd){
     background-color:grey;
 }
-tbody tr:nth-child(even){
+tbody.main-body tr:nth-child(even){
     background-color:skyblue;
 }
 
 .total-bill{
-    background-color:green !important;
+    background-color:pink;
 }
