@@ -27,8 +27,10 @@
         # 'security/ir.model.access.csv',
         'views/views.xml',
         'views/templates.xml',
+        'static/src/paper_formats/paper_format.xml',
         'report_actions/report_actions.xml',
         'report_templates/so_report_ext_template.xml',
+        'report_templates/scratch_report.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
